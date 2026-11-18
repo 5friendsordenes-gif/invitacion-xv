@@ -4,335 +4,669 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis XV Años - Linda Patricia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #c6a052;
-            --rose-gold: #b37d82;
-            --dark-rose: #8a5a60;
-            --bg-light: #fcf8f9;
+            --gold: #c49f68;
+            --gold-light: #e2c89c;
+            --rose-title: #a86b72;
+            --rose-date: #a44a5c;
+            --text-dark: #4a3b3c;
+            --heart-peach: #dfa68c;
         }
-        
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            padding: 0;
-            /* Fondo holográfico suave imitando el borde de la imagen */
-            background: radial-gradient(circle at top left, #fdf5f6, transparent 40%),
-                        radial-gradient(circle at bottom right, #f5eef5, transparent 40%),
-                        linear-gradient(135deg, #fdfcfc 0%, #fbeff2 50%, #fbf5f0 100%);
-            font-family: 'Playfair Display', serif;
-            color: var(--dark-rose);
+            padding: 24px 14px;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            font-family: 'EB Garamond', serif;
+            color: var(--text-dark);
             overflow-x: hidden;
+            background-color: #faf7f9;
+            position: relative;
+        }
+
+        /* Fondo tornasol con movimiento suave */
+        .pearl-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            background: linear-gradient(125deg, #fffdfd 0%, #f9eef4 25%, #eef4fb 50%, #f7eff9 75%, #fdf4ee 100%);
+            background-size: 200% 200%;
+            animation: pearlGradient 16s ease-in-out infinite alternate;
+        }
+
+        .pearl-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(65px);
+            opacity: 0.72;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(255, 214, 232, 0.9), transparent 70%);
+            top: -80px;
+            left: -80px;
+            animation: floatOrb1 14s ease-in-out infinite alternate;
+        }
+
+        .orb-2 {
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(206, 232, 255, 0.9), transparent 70%);
+            top: 20%;
+            right: -120px;
+            animation: floatOrb2 18s ease-in-out infinite alternate;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(232, 212, 252, 0.85), transparent 70%);
+            bottom: -100px;
+            left: 10%;
+            animation: floatOrb3 16s ease-in-out infinite alternate;
+        }
+
+        .orb-4 {
+            width: 340px;
+            height: 340px;
+            background: radial-gradient(circle, rgba(255, 229, 206, 0.85), transparent 70%);
+            bottom: 18%;
+            right: 5%;
+            animation: floatOrb1 20s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes pearlGradient {
+            0% { background-position: 0% 20%; }
+            50% { background-position: 100% 60%; }
+            100% { background-position: 20% 100%; }
+        }
+
+        @keyframes floatOrb1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(65px, 50px) scale(1.15); }
+        }
+
+        @keyframes floatOrb2 {
+            0% { transform: translate(0, 0) scale(1.05); }
+            100% { transform: translate(-70px, 60px) scale(0.95); }
+        }
+
+        @keyframes floatOrb3 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(55px, -60px) scale(1.12); }
+        }
+
+        /* Pantalla de bienvenida para activar la música */
+        .welcome-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 251, 253, 0.96), rgba(244, 236, 248, 0.96), rgba(238, 245, 253, 0.96));
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .welcome-box {
+            max-width: 380px;
+            width: 100%;
+            padding: 42px 28px;
+            border: 1.5px solid rgba(196, 159, 104, 0.75);
+            border-radius: 190px 190px 24px 24px;
+            background: rgba(255, 255, 255, 0.72);
+            box-shadow: 0 18px 40px rgba(168, 107, 114, 0.14);
+        }
+
+        .welcome-sub {
+            font-size: 1rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--rose-title);
+            margin-bottom: 6px;
+        }
+
+        .btn-open {
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #d8b882, #b98f53);
+            color: #ffffff;
+            padding: 13px 30px;
+            border-radius: 30px;
+            font-family: 'EB Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            box-shadow: 0 6px 18px rgba(196, 159, 104, 0.38);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn-open:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(196, 159, 104, 0.48);
+        }
+
+        /* Botón flotante de música */
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 50;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(196, 159, 104, 0.8);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(8px);
+            color: var(--rose-title);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px rgba(168, 107, 114, 0.22);
+            transition: transform 0.2s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.06);
+        }
+
+        .card-wrapper {
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+            margin: 20px auto;
         }
 
         .card {
-            background-color: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(15px);
-            max-width: 500px;
-            width: 90%;
-            margin: 40px auto;
-            padding: 50px 30px;
-            text-align: center;
             position: relative;
-            /* Doble borde dorado con forma de arco arriba */
-            border: 1px solid var(--gold);
-            border-radius: 250px 250px 20px 20px;
-            box-shadow: 0 15px 40px rgba(179, 125, 130, 0.15);
+            background: linear-gradient(
+                160deg,
+                rgba(255, 255, 255, 0.72) 0%,
+                rgba(253, 247, 250, 0.65) 45%,
+                rgba(246, 249, 255, 0.68) 75%,
+                rgba(255, 250, 246, 0.72) 100%
+            );
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1.5px solid rgba(196, 159, 104, 0.75);
+            border-radius: 250px 250px 26px 26px;
+            padding: 46px 28px 50px;
+            text-align: center;
+            box-shadow:
+                0 18px 45px rgba(168, 107, 114, 0.14),
+                inset 0 0 35px rgba(255, 255, 255, 0.85);
             z-index: 1;
         }
 
-        /* Borde interior delgado */
         .card::before {
             content: '';
             position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid rgba(198, 160, 82, 0.4);
-            border-radius: 240px 240px 15px 15px;
+            top: 9px;
+            left: 9px;
+            right: 9px;
+            bottom: 9px;
+            border: 1px solid rgba(196, 159, 104, 0.35);
+            border-radius: 242px 242px 20px 20px;
             pointer-events: none;
             z-index: -1;
         }
 
-        /* Decoración Mariposa Top Left */
         .butterfly-top {
             position: absolute;
-            top: -20px;
-            left: -20px;
-            width: 120px;
-            opacity: 0.85;
-            transform: rotate(-15deg);
+            top: 8px;
+            left: -18px;
+            width: 118px;
+            z-index: 3;
             pointer-events: none;
+            filter: drop-shadow(0 6px 12px rgba(168, 107, 114, 0.18));
+            transform: rotate(-12deg);
         }
 
-        /* Decoración Mariposa Bottom Right */
-        .butterfly-bottom {
+        .botanical-bottom {
             position: absolute;
-            bottom: -30px;
-            right: -30px;
-            width: 150px;
-            opacity: 0.85;
-            transform: rotate(15deg);
+            bottom: -14px;
+            right: -18px;
+            width: 155px;
+            z-index: 3;
             pointer-events: none;
+            filter: drop-shadow(0 6px 12px rgba(168, 107, 114, 0.16));
         }
 
-        .crown {
-            width: 60px;
-            margin: 0 auto -10px auto;
-            display: block;
-            fill: var(--gold);
-        }
-
-        .title-xv {
-            font-family: 'Great Vibes', cursive;
-            color: var(--gold);
-            margin: 10px 0;
+        .crown-wrap {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            gap: 10px;
+            margin-bottom: 4px;
         }
-        .title-xv .small { font-size: 3rem; }
-        .title-xv .large { font-size: 5rem; }
+
+        .crown-line {
+            width: 45px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+
+        .crown-line.right {
+            background: linear-gradient(to left, transparent, var(--gold));
+        }
+
+        .crown {
+            width: 58px;
+            height: auto;
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 1.8;
+        }
+
+        .title-xv {
+            font-family: 'Pinyon Script', cursive;
+            font-weight: 400;
+            margin: 2px 0 8px;
+            line-height: 1.05;
+            background: linear-gradient(180deg, #d7b67c 0%, #b1864d 55%, #cfa96d 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.9));
+        }
+
+        .title-xv .word-small { font-size: 3.1rem; }
+        .title-xv .word-xv { font-size: 4.9rem; margin: 0 2px; }
 
         .name {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
             font-weight: 700;
-            margin: 15px 0 25px 0;
-            color: var(--rose-gold);
-            letter-spacing: 1px;
+            font-size: 2rem;
+            color: var(--rose-title);
+            margin: 6px 0 12px;
+            letter-spacing: 0.4px;
+            line-height: 1.2;
         }
 
         .parents {
             font-size: 1.05rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            line-height: 1.55;
+            margin: 8px 0 12px;
+            color: var(--text-dark);
         }
 
         .divider {
-            color: var(--gold);
-            font-size: 1.2rem;
-            margin: 20px 0;
-            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 18px auto;
+            max-width: 240px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(196, 159, 104, 0.65), transparent);
+        }
+
+        .divider span {
+            color: var(--heart-peach);
+            font-size: 0.95rem;
+            line-height: 1;
         }
 
         .date {
-            font-size: 1.4rem;
+            font-family: 'EB Garamond', serif;
+            font-size: 1.48rem;
             font-weight: 600;
-            color: var(--rose-gold);
-            margin-bottom: 25px;
-            font-style: italic;
+            color: var(--rose-date);
+            margin: 10px 0 20px;
+            letter-spacing: 0.3px;
         }
 
         .section-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            color: var(--rose-gold);
-            margin-bottom: 10px;
-            font-weight: 700;
+            font-family: 'EB Garamond', serif;
+            font-size: 1.45rem;
+            font-weight: 500;
+            color: var(--rose-title);
+            margin: 4px 0 8px;
         }
 
         .details {
             font-size: 1.05rem;
             line-height: 1.5;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
+            color: var(--text-dark);
+        }
+
+        .countdown-label {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--rose-title);
+            margin-bottom: 8px;
         }
 
         .btn {
             display: inline-block;
-            background: linear-gradient(135deg, #d4af37, #c6a052);
-            color: white;
-            padding: 12px 25px;
+            background: linear-gradient(135deg, #d8b882, #b98f53);
+            color: #ffffff;
+            padding: 10px 24px;
             text-decoration: none;
             border-radius: 30px;
-            font-size: 0.95rem;
+            font-family: 'EB Garamond', serif;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(198, 160, 82, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-            font-family: 'Cinzel', serif;
+            letter-spacing: 0.6px;
+            margin: 4px 0 20px;
+            box-shadow: 0 5px 15px rgba(196, 159, 104, 0.3);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
+
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(198, 160, 82, 0.4);
+            box-shadow: 0 8px 20px rgba(196, 159, 104, 0.42);
         }
-        
+
         .btn-whatsapp {
-            background: linear-gradient(135deg, #b37d82, #9c686d);
-            box-shadow: 0 4px 15px rgba(179, 125, 130, 0.3);
+            background: linear-gradient(135deg, #c0838b, #9f6069);
+            box-shadow: 0 5px 15px rgba(168, 107, 114, 0.3);
+            margin-bottom: 10px;
         }
+
         .btn-whatsapp:hover {
-            box-shadow: 0 6px 20px rgba(179, 125, 130, 0.4);
+            box-shadow: 0 8px 20px rgba(168, 107, 114, 0.42);
         }
 
         .countdown-container {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 25px;
+            gap: 10px;
+            margin-bottom: 10px;
         }
+
         .countdown-box {
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid var(--gold);
-            border-radius: 8px;
-            padding: 10px 5px;
-            min-width: 55px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(196, 159, 104, 0.55);
+            border-radius: 10px;
+            padding: 8px 6px;
+            min-width: 58px;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.8);
         }
+
         .countdown-box span {
             display: block;
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.45rem;
             font-weight: 700;
-            color: var(--rose-gold);
+            color: var(--rose-date);
+            line-height: 1.1;
         }
+
         .countdown-box small {
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--dark-rose);
+            letter-spacing: 0.8px;
+            color: var(--text-dark);
         }
 
         .itinerary {
-            text-align: left;
-            margin: 0 auto;
-            max-width: 320px;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-        .itinerary b {
-            color: var(--rose-gold);
-            font-weight: 600;
+            margin: 4px auto 8px;
+            font-size: 1.04rem;
+            line-height: 1.75;
+            color: var(--text-dark);
         }
 
-        .gift-code {
-            margin-top: 10px;
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.2rem;
-            color: var(--rose-gold);
+        .itinerary b {
+            font-weight: 600;
+            color: #5e4447;
+        }
+
+        .gift-text {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-top: 4px;
+        }
+
+        @media (max-width: 420px) {
+            .card {
+                padding: 42px 20px 44px;
+                border-radius: 180px 180px 22px 22px;
+            }
+            .card::before {
+                border-radius: 172px 172px 16px 16px;
+            }
+            .title-xv .word-small { font-size: 2.5rem; }
+            .title-xv .word-xv { font-size: 4rem; }
+            .name { font-size: 1.7rem; }
+            .butterfly-top { width: 92px; left: -12px; }
+            .botanical-bottom { width: 120px; right: -12px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <!-- SVG Mariposa Superior -->
-        <svg class="butterfly-top" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <!-- Fondo tornasol animado -->
+    <div class="pearl-bg">
+        <div class="pearl-orb orb-1"></div>
+        <div class="pearl-orb orb-2"></div>
+        <div class="pearl-orb orb-3"></div>
+        <div class="pearl-orb orb-4"></div>
+    </div>
+
+    <!-- Audio de fondo (sube tu archivo como musica.mp3 a GitHub) -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Pantalla de bienvenida -->
+    <div class="welcome-overlay" id="welcome-overlay">
+        <div class="welcome-box">
+            <div class="welcome-sub">Estás invitado a</div>
+            <div class="title-xv">
+                <span class="word-small">Mis</span>
+                <span class="word-xv">XV</span>
+                <span class="word-small">años</span>
+            </div>
+            <div class="name">Linda Patricia</div>
+            <button class="btn-open" id="btn-open">Abrir Invitación ✨</button>
+        </div>
+    </div>
+
+    <!-- Botón flotante para pausar/reproducir música -->
+    <button class="music-toggle" id="music-toggle" aria-label="Pausar o reproducir música" title="Música">🔊</button>
+
+    <div class="card-wrapper">
+        <!-- Mariposa tornasol superior izquierda -->
+        <svg class="butterfly-top" viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#f4d9df;stop-opacity:0.9" />
-                    <stop offset="100%" style="stop-color:#c89fce;stop-opacity:0.6" />
+                <linearGradient id="pearlWing1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
+                    <stop offset="35%" stop-color="#f7dce8" stop-opacity="0.82"/>
+                    <stop offset="70%" stop-color="#dcebfb" stop-opacity="0.78"/>
+                    <stop offset="100%" stop-color="#f5e1cf" stop-opacity="0.88"/>
+                </linearGradient>
+                <linearGradient id="pearlWing2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#fff8f4" stop-opacity="0.9"/>
+                    <stop offset="50%" stop-color="#e9dcf6" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="#d7ebf7" stop-opacity="0.85"/>
                 </linearGradient>
             </defs>
-            <path d="M50,40 C30,10 10,20 15,45 C20,70 45,55 50,55 C55,55 80,70 85,45 C90,20 70,10 50,40 Z" fill="url(#grad1)" stroke="#d4af37" stroke-width="0.5"/>
-            <path d="M50,40 C35,25 20,35 25,50 C30,65 45,55 50,55 C55,55 70,65 75,50 C80,35 65,25 50,40 Z" fill="rgba(255,255,255,0.4)" stroke="#d4af37" stroke-width="0.3"/>
+            <path d="M68,62 C52,18 14,10 12,38 C10,60 40,68 68,62 Z" fill="url(#pearlWing1)" stroke="#c49f68" stroke-width="1"/>
+            <path d="M68,64 C44,68 22,82 32,98 C42,110 62,92 68,64 Z" fill="url(#pearlWing2)" stroke="#c49f68" stroke-width="0.9"/>
+            <path d="M72,62 C88,18 124,14 126,40 C128,62 98,68 72,62 Z" fill="url(#pearlWing1)" stroke="#c49f68" stroke-width="1"/>
+            <path d="M72,64 C96,68 116,84 106,98 C96,110 78,92 72,64 Z" fill="url(#pearlWing2)" stroke="#c49f68" stroke-width="0.9"/>
+            <path d="M66,58 C50,36 28,34 26,44 M74,58 C90,36 110,36 112,46" stroke="#c49f68" stroke-width="0.6" fill="none" opacity="0.6"/>
+            <ellipse cx="70" cy="64" rx="2.5" ry="14" fill="#c49f68"/>
+            <path d="M69,50 Q64,38 58,36 M71,50 Q76,38 82,36" stroke="#c49f68" stroke-width="0.9" fill="none"/>
         </svg>
 
-        <!-- SVG Mariposa Inferior -->
-        <svg class="butterfly-bottom" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50,40 C30,10 10,20 15,45 C20,70 45,55 50,55 C55,55 80,70 85,45 C90,20 70,10 50,40 Z" fill="url(#grad1)" stroke="#d4af37" stroke-width="0.5"/>
-            <path d="M50,40 C35,25 20,35 25,50 C30,65 45,55 50,55 C55,55 70,65 75,50 C80,35 65,25 50,40 Z" fill="rgba(255,255,255,0.4)" stroke="#d4af37" stroke-width="0.3"/>
+        <!-- Mariposa y hojas perladas inferiores derechas -->
+        <svg class="botanical-bottom" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+            <path d="M160,175 Q148,110 165,25" stroke="#c49f68" stroke-width="1.2" fill="none" opacity="0.85"/>
+            <path d="M158,60 C130,45 125,22 148,18 C162,32 162,48 158,60 Z" fill="url(#pearlWing1)" stroke="#c49f68" stroke-width="0.9"/>
+            <path d="M156,95 C120,85 110,60 135,55 C152,68 156,82 156,95 Z" fill="url(#pearlWing2)" stroke="#c49f68" stroke-width="0.9"/>
+            <g transform="translate(22, 62) rotate(18)">
+                <path d="M68,62 C52,18 14,10 12,38 C10,60 40,68 68,62 Z" fill="url(#pearlWing1)" stroke="#c49f68" stroke-width="1"/>
+                <path d="M68,64 C44,68 22,82 32,98 C42,110 62,92 68,64 Z" fill="url(#pearlWing2)" stroke="#c49f68" stroke-width="0.9"/>
+                <path d="M72,62 C88,18 124,14 126,40 C128,62 98,68 72,62 Z" fill="url(#pearlWing1)" stroke="#c49f68" stroke-width="1"/>
+                <path d="M72,64 C96,68 116,84 106,98 C96,110 78,92 72,64 Z" fill="url(#pearlWing2)" stroke="#c49f68" stroke-width="0.9"/>
+                <ellipse cx="70" cy="64" rx="2.5" ry="14" fill="#c49f68"/>
+            </g>
         </svg>
 
-        <!-- Corona SVG -->
-        <svg class="crown" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10,40 L0,15 L25,25 L50,0 L75,25 L100,15 L90,40 Z" />
-            <circle cx="50" cy="45" r="3" />
-            <circle cx="25" cy="45" r="3" />
-            <circle cx="75" cy="45" r="3" />
-            <circle cx="50" cy="-5" r="4" />
-        </svg>
+        <div class="card">
+            <div class="crown-wrap">
+                <span class="crown-line"></span>
+                <svg class="crown" viewBox="0 0 100 52" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14,42 L6,18 L28,30 L50,8 L72,30 L94,18 L86,42 Z" fill="rgba(196, 159, 104, 0.18)"/>
+                    <path d="M16,46 L84,46" stroke-width="1.6"/>
+                    <circle cx="50" cy="5" r="2.5" fill="#c49f68"/>
+                    <circle cx="6" cy="15" r="2" fill="#c49f68"/>
+                    <circle cx="94" cy="15" r="2" fill="#c49f68"/>
+                    <circle cx="28" cy="24" r="1.8" fill="#c49f68"/>
+                    <circle cx="72" cy="24" r="1.8" fill="#c49f68"/>
+                </svg>
+                <span class="crown-line right"></span>
+            </div>
 
-        <h1 class="title-xv">
-            <span class="small">Mis</span> 
-            <span class="large">XV</span> 
-            <span class="small">Años</span>
-        </h1>
-        
-        <div class="name">Linda Patricia Borja García</div>
-        
-        <div class="parents">
-            Mamá: Jaqueline Esperanza García Cruz<br>
-            Padrinos: Guillermo Rubio, Lesly Rubio
+            <h1 class="title-xv">
+                <span class="word-small">Mis</span>
+                <span class="word-xv">XV</span>
+                <span class="word-small">años</span>
+            </h1>
+
+            <div class="name">Linda Patricia Borja García</div>
+
+            <div class="divider"><span>♥</span></div>
+
+            <div class="parents">
+                Mamá: Jaqueline Esperanza García Cruz<br>
+                Padrinos: Guillermo Rubio, Lesly Rubio
+            </div>
+
+            <div class="divider"><span>♥</span></div>
+
+            <div class="date">Viernes 11 de Diciembre 2026</div>
+
+            <div class="section-title">Ceremonia Religiosa</div>
+            <div class="details">
+                4:45 a 5:00 pm<br>
+                Iglesia: Santuario del Señor del Calvario Culhuacán<br>
+                Cda. 16 de Septiembre 11, Culhuacán, Iztapalapa, 09800
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Santuario+del+Señor+del+Calvario+Culhuacan+Iztapalapa" target="_blank" class="btn">Ver ubicación en Maps</a>
+
+            <div class="countdown-label">Faltan para la ceremonia:</div>
+            <div class="countdown-container">
+                <div class="countdown-box"><span id="m-days">00</span><small>Días</small></div>
+                <div class="countdown-box"><span id="m-hours">00</span><small>Hrs</small></div>
+                <div class="countdown-box"><span id="m-mins">00</span><small>Min</small></div>
+                <div class="countdown-box"><span id="m-secs">00</span><small>Seg</small></div>
+            </div>
+
+            <div class="divider"><span>♥</span></div>
+
+            <div class="section-title">Recepción</div>
+            <div class="details">
+                Salón de eventos sociales Paladium<br>
+                Av. Tláhuac 4749, el vergel, Iztapalapa 09880, México
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Salon+de+eventos+sociales+Paladium+Av+Tlahuac+4749" target="_blank" class="btn">Ver ubicación en Maps</a>
+
+            <div class="countdown-label">Faltan para la recepción:</div>
+            <div class="countdown-container">
+                <div class="countdown-box"><span id="r-days">00</span><small>Días</small></div>
+                <div class="countdown-box"><span id="r-hours">00</span><small>Hrs</small></div>
+                <div class="countdown-box"><span id="r-mins">00</span><small>Min</small></div>
+                <div class="countdown-box"><span id="r-secs">00</span><small>Seg</small></div>
+            </div>
+
+            <div class="divider"><span>♥</span></div>
+
+            <div class="section-title">Itinerario</div>
+            <div class="itinerary">
+                <b>6:30 pm a 7:00 pm:</b> Recepción<br>
+                <b>8:00 pm a 9:00 pm:</b> Comida<br>
+                <b>9:00 pm a 10:00 pm:</b> Vals<br>
+                <b>10:00 pm a 12:00 am:</b> Sorpresa<br>
+                <b>12:00 am a 2:00 am:</b> Baile<br>
+                <b>2:00 am a 2:30 am:</b> Despedida
+            </div>
+
+            <div class="divider"><span>♥</span></div>
+
+            <div class="section-title">Confirmar Asistencia</div>
+            <div class="details">
+                Por favor, confírmanos si nos acompañarás en este día tan especial.
+            </div>
+            <a href="https://wa.me/525527055695?text=Hola%20Linda%2C%20te%20confirmo%20mi%2Fnuestra%20asistencia%20a%20tu%20fiesta.%20%28Nombre%3A%20________________%29%20%28Asistentes%3A%20___%29" target="_blank" class="btn btn-whatsapp">Confirmar por WhatsApp</a>
+
+            <div class="divider"><span>♥</span></div>
+
+            <div class="section-title">Regalos</div>
+            <div class="gift-text">Lluvia de Sobres</div>
         </div>
-
-        <div class="divider">♥</div>
-
-        <div class="date">Viernes 11 de Diciembre 2026</div>
-
-        <!-- Ceremonia -->
-        <div class="section-title">Ceremonia Religiosa</div>
-        <div class="details">
-            4:45 a 5:00 pm<br>
-            Iglesia: Santuario del Señor del Calvario Culhuacán<br>
-            Cda. 16 de Septiembre 11, Culhuacán, Iztapalapa, 09800
-        </div>
-        <a href="https://www.google.com/maps/search/?api=1&query=Santuario+del+Señor+del+Calvario+Culhuacan+Iztapalapa" target="_blank" class="btn">Ver en Google Maps</a>
-        
-        <div class="details">Faltan:</div>
-        <div class="countdown-container" id="timer-mass">
-            <div class="countdown-box"><span id="m-days">00</span><small>Días</small></div>
-            <div class="countdown-box"><span id="m-hours">00</span><small>Hrs</small></div>
-            <div class="countdown-box"><span id="m-mins">00</span><small>Min</small></div>
-            <div class="countdown-box"><span id="m-secs">00</span><small>Seg</small></div>
-        </div>
-
-        <div class="divider">♥</div>
-
-        <!-- Recepción -->
-        <div class="section-title">Recepción</div>
-        <div class="details">
-            Salón de eventos sociales Paladium<br>
-            Av. Tláhuac 4749, el vergel, Iztapalapa 09880, México
-        </div>
-        <a href="https://www.google.com/maps/search/?api=1&query=Salon+de+eventos+sociales+Paladium+Av+Tlahuac+4749" target="_blank" class="btn">Ver en Google Maps</a>
-        
-        <div class="details">Faltan:</div>
-        <div class="countdown-container" id="timer-reception">
-            <div class="countdown-box"><span id="r-days">00</span><small>Días</small></div>
-            <div class="countdown-box"><span id="r-hours">00</span><small>Hrs</small></div>
-            <div class="countdown-box"><span id="r-mins">00</span><small>Min</small></div>
-            <div class="countdown-box"><span id="r-secs">00</span><small>Seg</small></div>
-        </div>
-
-        <div class="divider">♥</div>
-
-        <!-- Itinerario -->
-        <div class="section-title">Itinerario</div>
-        <div class="itinerary">
-            <b>6:30 pm a 7:00 pm:</b> Recepción<br>
-            <b>8:00 pm a 9:00 pm:</b> Comida<br>
-            <b>9:00 pm a 10:00 pm:</b> Vals<br>
-            <b>10:00 pm a 12:00 am:</b> Sorpresa<br>
-            <b>12:00 am a 2:00 am:</b> Baile<br>
-            <b>2:00 am a 2:30 am:</b> Despedida
-        </div>
-
-        <div class="divider">♥</div>
-
-        <!-- Confirmar Asistencia -->
-        <div class="section-title">Confirmar Asistencia</div>
-        <div class="details">
-            Por favor, confírmanos si nos acompañarás en este día tan especial.
-        </div>
-        <!-- Número actualizado al 5527055695 -->
-        <a href="https://wa.me/525527055695?text=Hola%20Linda%2C%20te%20confirmo%20mi%2Fnuestra%20asistencia%20a%20tu%20fiesta.%20%28Nombre%3A%20________________%29%20%28Asistentes%3A%20___%29" target="_blank" class="btn btn-whatsapp">Confirmar por WhatsApp</a>
-
-        <div class="divider">♥</div>
-
-        <!-- Regalos -->
-        <div class="section-title">Regalos</div>
-        <div class="gift-code">Lluvia de Sobres</div>
     </div>
 
     <script>
-        const massDate = new Date("Dec 11, 2026 17:00:00").getTime();
-        const receptionDate = new Date("Dec 11, 2026 18:30:00").getTime();
+        // Control de portada y música
+        const audio = document.getElementById('bg-music');
+        const overlay = document.getElementById('welcome-overlay');
+        const btnOpen = document.getElementById('btn-open');
+        const musicToggle = document.getElementById('music-toggle');
+
+        btnOpen.addEventListener('click', () => {
+            overlay.classList.add('hidden');
+            audio.play().then(() => {
+                musicToggle.textContent = '🔊';
+            }).catch(() => {
+                musicToggle.textContent = '🔇';
+            });
+        });
+
+        musicToggle.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    musicToggle.textContent = '🔊';
+                }).catch(() => {});
+            } else {
+                audio.pause();
+                musicToggle.textContent = '🔇';
+            }
+        });
+
+        // Contadores regresivos
+        const massDate = new Date("2026-12-11T17:00:00").getTime();
+        const receptionDate = new Date("2026-12-11T18:30:00").getTime();
 
         function updateCountdown(targetDate, prefix) {
             const now = new Date().getTime();
@@ -357,10 +691,13 @@
             document.getElementById(prefix + '-secs').innerText = seconds.toString().padStart(2, '0');
         }
 
-        setInterval(() => {
+        function tick() {
             updateCountdown(massDate, 'm');
             updateCountdown(receptionDate, 'r');
-        }, 1000);
+        }
+
+        tick();
+        setInterval(tick, 1000);
     </script>
 </body>
 </html>
