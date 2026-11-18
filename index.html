@@ -1,1 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Años - Linda Patricia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d4a373; /* Dorado suave */
+            --text-dark: #5a4a42;
+            --bg-pink: #fdf5f6; /* Rosa muy claro */
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fdf5f6 0%, #fbe8ea 50%, #f4d9df 100%);
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--primary-color);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+            margin: 40px auto;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .title-xv {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 10px 0 20px 0;
+            color: #b57a68;
+        }
+        .parents {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .divider {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin: 15px 0;
+        }
+        .date {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #b57a68;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 1.4rem;
+            color: #b57a68;
+            margin-bottom: 10px;
+        }
+        .details {
+            font-size: 1rem;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #b57a68;
+        }
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .countdown-box {
+            background: #fff;
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 10px;
+            min-width: 50px;
+        }
+        .countdown-box span {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .countdown-box small {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+        .itinerary {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 350px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        .gift-code {
+            margin-top: 30px;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
 
+    <div class="card">
+        <h1 class="title-xv">Mis XV Años</h1>
+        <div class="name">Linda Patricia Borja García</div>
+        
+        <div class="parents">
+            Mamá: Jaqueline Esperanza García Cruz<br>
+            Padrinos: Guillermo Rubio, Lesly Rubio
+        </div>
+
+        <div class="divider">♥</div>
+
+        <div class="date">Viernes 11 de Diciembre 2026</div>
+
+        <!-- Ceremonia -->
+        <div class="section-title">Ceremonia Religiosa</div>
+        <div class="details">
+            4:45 a 5:00 pm<br>
+            Iglesia: Santuario del Señor del Calvario Culhuacán<br>
+            Cda. 16 de Septiembre 11, Culhuacán, Iztapalapa, 09800
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Santuario+del+Señor+del+Calvario+Culhuacan+Iztapalapa" target="_blank" class="btn">Ver en Google Maps</a>
+        
+        <div class="details">Faltan:</div>
+        <div class="countdown-container" id="timer-mass">
+            <div class="countdown-box"><span id="m-days">00</span><small>Días</small></div>
+            <div class="countdown-box"><span id="m-hours">00</span><small>Hrs</small></div>
+            <div class="countdown-box"><span id="m-mins">00</span><small>Min</small></div>
+            <div class="countdown-box"><span id="m-secs">00</span><small>Seg</small></div>
+        </div>
+
+        <div class="divider">♥</div>
+
+        <!-- Recepción -->
+        <div class="section-title">Recepción</div>
+        <div class="details">
+            Salón de eventos sociales Paladium<br>
+            Av. Tláhuac 4749, el vergel, Iztapalapa 09880, México
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Salon+de+eventos+sociales+Paladium+Av+Tlahuac+4749" target="_blank" class="btn">Ver en Google Maps</a>
+        
+        <div class="details">Faltan:</div>
+        <div class="countdown-container" id="timer-reception">
+            <div class="countdown-box"><span id="r-days">00</span><small>Días</small></div>
+            <div class="countdown-box"><span id="r-hours">00</span><small>Hrs</small></div>
+            <div class="countdown-box"><span id="r-mins">00</span><small>Min</small></div>
+            <div class="countdown-box"><span id="r-secs">00</span><small>Seg</small></div>
+        </div>
+
+        <div class="divider">♥</div>
+
+        <!-- Itinerario -->
+        <div class="section-title">Itinerario</div>
+        <div class="itinerary">
+            <b>6:30 pm a 7:00 pm:</b> Recepción<br>
+            <b>8:00 pm a 9:00 pm:</b> Comida<br>
+            <b>9:00 pm a 10:00 pm:</b> Vals<br>
+            <b>10:00 pm a 12:00 am:</b> Sorpresa<br>
+            <b>12:00 am a 2:00 am:</b> Baile<br>
+            <b>2:00 am a 2:30 am:</b> Despedida
+        </div>
+
+        <div class="divider">♥</div>
+
+        <!-- Código de regalos -->
+        <div class="section-title">Código de Regalos</div>
+        <div class="gift-code">✉️ Lluvia de Sobres</div>
+    </div>
+
+    <script>
+        // Fechas objetivo
+        const massDate = new Date("Dec 11, 2026 17:00:00").getTime();
+        const receptionDate = new Date("Dec 11, 2026 18:30:00").getTime();
+
+        function updateCountdown(targetDate, prefix) {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById(prefix + '-days').innerText = "00";
+                document.getElementById(prefix + '-hours').innerText = "00";
+                document.getElementById(prefix + '-mins').innerText = "00";
+                document.getElementById(prefix + '-secs').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById(prefix + '-days').innerText = days.toString().padStart(2, '0');
+            document.getElementById(prefix + '-hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById(prefix + '-mins').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById(prefix + '-secs').innerText = seconds.toString().padStart(2, '0');
+        }
+
+        // Actualizar cada segundo
+        setInterval(() => {
+            updateCountdown(massDate, 'm');
+            updateCountdown(receptionDate, 'r');
+        }, 1000);
+    </script>
+</body>
+</html>
