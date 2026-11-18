@@ -10,11 +10,11 @@
     <style>
         :root {
             --gold: #c49f68;
-            --gold-light: #e2c89c;
-            --rose-title: #a86b72;
-            --rose-date: #a44a5c;
-            --text-dark: #4a3b3c;
-            --heart-peach: #dfa68c;
+            --gold-deep: #ab8247;
+            --rose-title: #96555e;
+            --rose-date: #993e51;
+            --text-dark: #3e2e30;
+            --heart-peach: #d8967a;
         }
 
         * {
@@ -31,18 +31,18 @@
             font-family: 'EB Garamond', serif;
             color: var(--text-dark);
             overflow-x: hidden;
-            background-color: #faf7f9;
+            background-color: #f9f3f7;
             position: relative;
         }
 
-        /* Fondo tornasol con movimiento suave */
+        /* Fondo exterior perlado tornasol animado */
         .pearl-bg {
             position: fixed;
             inset: 0;
             z-index: -2;
             overflow: hidden;
-            background: linear-gradient(125deg, #fffdfd 0%, #f9eef4 25%, #eef4fb 50%, #f7eff9 75%, #fdf4ee 100%);
-            background-size: 200% 200%;
+            background: linear-gradient(125deg, #fceef5 0%, #e8f3fc 25%, #f3e9fb 50%, #fdf2e9 75%, #e6f6f5 100%);
+            background-size: 240% 240%;
             animation: pearlGradient 16s ease-in-out infinite alternate;
         }
 
@@ -50,14 +50,14 @@
             position: absolute;
             border-radius: 50%;
             filter: blur(65px);
-            opacity: 0.72;
+            opacity: 0.78;
             pointer-events: none;
         }
 
         .orb-1 {
             width: 380px;
             height: 380px;
-            background: radial-gradient(circle, rgba(255, 214, 232, 0.9), transparent 70%);
+            background: radial-gradient(circle, rgba(255, 202, 226, 0.9), transparent 70%);
             top: -80px;
             left: -80px;
             animation: floatOrb1 14s ease-in-out infinite alternate;
@@ -66,7 +66,7 @@
         .orb-2 {
             width: 420px;
             height: 420px;
-            background: radial-gradient(circle, rgba(206, 232, 255, 0.9), transparent 70%);
+            background: radial-gradient(circle, rgba(190, 225, 255, 0.9), transparent 70%);
             top: 20%;
             right: -120px;
             animation: floatOrb2 18s ease-in-out infinite alternate;
@@ -75,7 +75,7 @@
         .orb-3 {
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(232, 212, 252, 0.85), transparent 70%);
+            background: radial-gradient(circle, rgba(224, 198, 255, 0.88), transparent 70%);
             bottom: -100px;
             left: 10%;
             animation: floatOrb3 16s ease-in-out infinite alternate;
@@ -84,620 +84,13 @@
         .orb-4 {
             width: 340px;
             height: 340px;
-            background: radial-gradient(circle, rgba(255, 229, 206, 0.85), transparent 70%);
+            background: radial-gradient(circle, rgba(255, 222, 194, 0.88), transparent 70%);
             bottom: 18%;
             right: 5%;
             animation: floatOrb1 20s ease-in-out infinite alternate-reverse;
         }
 
         @keyframes pearlGradient {
-            0% { background-position: 0% 20%; }
-            50% { background-position: 100% 60%; }
-            100% { background-position: 20% 100%; }
-        }
-
-        @keyframes floatOrb1 {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(65px, 50px) scale(1.15); }
-        }
-
-        @keyframes floatOrb2 {
-            0% { transform: translate(0, 0) scale(1.05); }
-            100% { transform: translate(-70px, 60px) scale(0.95); }
-        }
-
-        @keyframes floatOrb3 {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(55px, -60px) scale(1.12); }
-        }
-
-        /* Pantalla de bienvenida para activar la música */
-        .welcome-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(255, 251, 253, 0.96), rgba(244, 236, 248, 0.96), rgba(238, 245, 253, 0.96));
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .welcome-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .welcome-box {
-            max-width: 380px;
-            width: 100%;
-            padding: 42px 28px;
-            border: 1.5px solid rgba(196, 159, 104, 0.75);
-            border-radius: 190px 190px 24px 24px;
-            background: rgba(255, 255, 255, 0.72);
-            box-shadow: 0 18px 40px rgba(168, 107, 114, 0.14);
-        }
-
-        .welcome-sub {
-            font-size: 1rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--rose-title);
-            margin-bottom: 6px;
-        }
-
-        .btn-open {
-            margin-top: 20px;
-            border: none;
-            cursor: pointer;
-            background: linear-gradient(135deg, #d8b882, #b98f53);
-            color: #ffffff;
-            padding: 13px 30px;
-            border-radius: 30px;
-            font-family: 'EB Garamond', serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 0.8px;
-            box-shadow: 0 6px 18px rgba(196, 159, 104, 0.38);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .btn-open:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(196, 159, 104, 0.48);
-        }
-
-        /* Botón flotante de música */
-        .music-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 50;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(196, 159, 104, 0.8);
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(8px);
-            color: var(--rose-title);
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 16px rgba(168, 107, 114, 0.22);
-            transition: transform 0.2s ease;
-        }
-
-        .music-toggle:hover {
-            transform: scale(1.06);
-        }
-
-        .card-wrapper {
-            position: relative;
-            max-width: 500px;
-            width: 100%;
-            margin: 20px auto;
-        }
-
-        .card {
-            position: relative;
-            background: linear-gradient(
-                160deg,
-                rgba(255, 255, 255, 0.72) 0%,
-                rgba(253, 247, 250, 0.65) 45%,
-                rgba(246, 249, 255, 0.68) 75%,
-                rgba(255, 250, 246, 0.72) 100%
-            );
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1.5px solid rgba(196, 159, 104, 0.75);
-            border-radius: 250px 250px 26px 26px;
-            padding: 46px 28px 50px;
-            text-align: center;
-            box-shadow:
-                0 18px 45px rgba(168, 107, 114, 0.14),
-                inset 0 0 35px rgba(255, 255, 255, 0.85);
-            z-index: 1;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 9px;
-            left: 9px;
-            right: 9px;
-            bottom: 9px;
-            border: 1px solid rgba(196, 159, 104, 0.35);
-            border-radius: 242px 242px 20px 20px;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .butterfly-top {
-            position: absolute;
-            top: 8px;
-            left: -18px;
-            width: 118px;
-            z-index: 3;
-            pointer-events: none;
-            filter: drop-shadow(0 6px 12px rgba(168, 107, 114, 0.18));
-            transform: rotate(-12deg);
-        }
-
-        .botanical-bottom {
-            position: absolute;
-            bottom: -14px;
-            right: -18px;
-            width: 155px;
-            z-index: 3;
-            pointer-events: none;
-            filter: drop-shadow(0 6px 12px rgba(168, 107, 114, 0.16));
-        }
-
-        .crown-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 4px;
-        }
-
-        .crown-line {
-            width: 45px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--gold));
-        }
-
-        .crown-line.right {
-            background: linear-gradient(to left, transparent, var(--gold));
-        }
-
-        .crown {
-            width: 58px;
-            height: auto;
-            fill: none;
-            stroke: var(--gold);
-            stroke-width: 1.8;
-        }
-
-        .title-xv {
-            font-family: 'Pinyon Script', cursive;
-            font-weight: 400;
-            margin: 2px 0 8px;
-            line-height: 1.05;
-            background: linear-gradient(180deg, #d7b67c 0%, #b1864d 55%, #cfa96d 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.9));
-        }
-
-        .title-xv .word-small { font-size: 3.1rem; }
-        .title-xv .word-xv { font-size: 4.9rem; margin: 0 2px; }
-
-        .name {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-weight: 700;
-            font-size: 2rem;
-            color: var(--rose-title);
-            margin: 6px 0 12px;
-            letter-spacing: 0.4px;
-            line-height: 1.2;
-        }
-
-        .parents {
-            font-size: 1.05rem;
-            line-height: 1.55;
-            margin: 8px 0 12px;
-            color: var(--text-dark);
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin: 18px auto;
-            max-width: 240px;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(196, 159, 104, 0.65), transparent);
-        }
-
-        .divider span {
-            color: var(--heart-peach);
-            font-size: 0.95rem;
-            line-height: 1;
-        }
-
-        .date {
-            font-family: 'EB Garamond', serif;
-            font-size: 1.48rem;
-            font-weight: 600;
-            color: var(--rose-date);
-            margin: 10px 0 20px;
-            letter-spacing: 0.3px;
-        }
-
-        .section-title {
-            font-family: 'EB Garamond', serif;
-            font-size: 1.45rem;
-            font-weight: 500;
-            color: var(--rose-title);
-            margin: 4px 0 8px;
-        }
-
-        .details {
-            font-size: 1.05rem;
-            line-height: 1.5;
-            margin-bottom: 14px;
-            color: var(--text-dark);
-        }
-
-        .countdown-label {
-            font-size: 0.95rem;
-            font-style: italic;
-            color: var(--rose-title);
-            margin-bottom: 8px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #d8b882, #b98f53);
-            color: #ffffff;
-            padding: 10px 24px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-family: 'EB Garamond', serif;
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 0.6px;
-            margin: 4px 0 20px;
-            box-shadow: 0 5px 15px rgba(196, 159, 104, 0.3);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(196, 159, 104, 0.42);
-        }
-
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #c0838b, #9f6069);
-            box-shadow: 0 5px 15px rgba(168, 107, 114, 0.3);
-            margin-bottom: 10px;
-        }
-
-        .btn-whatsapp:hover {
-            box-shadow: 0 8px 20px rgba(168, 107, 114, 0.42);
-        }
-
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .countdown-box {
-            background: rgba(255, 255, 255, 0.65);
-            border: 1px solid rgba(196, 159, 104, 0.55);
-            border-radius: 10px;
-            padding: 8px 6px;
-            min-width: 58px;
-            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-
-        .countdown-box span {
-            display: block;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.45rem;
-            font-weight: 700;
-            color: var(--rose-date);
-            line-height: 1.1;
-        }
-
-        .countdown-box small {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--text-dark);
-        }
-
-        .itinerary {
-            margin: 4px auto 8px;
-            font-size: 1.04rem;
-            line-height: 1.75;
-            color: var(--text-dark);
-        }
-
-        .itinerary b {
-            font-weight: 600;
-            color: #5e4447;
-        }
-
-        .gift-text {
-            font-size: 1.15rem;
-            font-weight: 500;
-            color: var(--text-dark);
-            margin-top: 4px;
-        }
-
-        @media (max-width: 420px) {
-            .card {
-                padding: 42px 20px 44px;
-                border-radius: 180px 180px 22px 22px;
-            }
-            .card::before {
-                border-radius: 172px 172px 16px 16px;
-            }
-            .title-xv .word-small { font-size: 2.5rem; }
-            .title-xv .word-xv { font-size: 4rem; }
-            .name { font-size: 1.7rem; }
-            .butterfly-top { width: 92px; left: -12px; }
-            .botanical-bottom { width: 120px; right: -12px; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Fondo tornasol animado -->
-    <div class="pearl-bg">
-        <div class="pearl-orb orb-1"></div>
-        <div class="pearl-orb orb-2"></div>
-        <div class="pearl-orb orb-3"></div>
-        <div class="pearl-orb orb-4"></div>
-    </div>
-
-    <!-- Audio de fondo (sube tu archivo como musica.mp3 a GitHub) -->
-    <audio id="bg-music" loop preload="auto">
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Pantalla de bienvenida -->
-    <div class="welcome-overlay" id="welcome-overlay">
-        <div class="welcome-box">
-            <div class="welcome-sub">Estás invitado a</div>
-            <div class="title-xv">
-                <span class="word-small">Mis</span>
-                <span class="word-xv">XV</span>
-                <span class="word-small">años</span>
-            </div>
-            <div class="name">Linda Patricia</div>
-            <button class="btn-open" id="btn-open">Abrir Invitación ✨</button>
-        </div>
-    </div>
-
-    <!-- Botón flotante para pausar/reproducir música -->
-    <button class="music-toggle" id="music-toggle" aria-label="Pausar o reproducir música" title="Música">🔊</button>
-
-    <div class="card-wrapper">
-        <!-- Mariposa tornasol superior izquierda -->
-        <svg class="butterfly-top" viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="pearlWing1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
-                    <stop offset="35%" stop-color="#f7dce8" stop-opacity="0.82"/>
-                    <stop offset="70%" stop-color="#dcebfb" stop-opacity="0.78"/>
-                    <stop offset="100%" stop-color="#f5e1cf" stop-opacity="0.88"/>
-                </linearGradient>
-                <linearGradient id="pearlWing2" x1="100%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#fff8f4" stop-opacity="0.9"/>
-                    <stop offset="50%" stop-color="#e9dcf6" stop-opacity="0.8"/>
-                    <stop offset="100%" stop-color="#d7ebf7" stop-opacity="0.85"/>
-                </linearGradient>
-            </defs>
-            <path d="M68,62 C52,18 14,10 12,38 C10,60 40,68 68,62 Z" fill="url(#pearlWing1)" stroke="#c49f68" stroke-width="1"/>
-            <path d="M68,64 C44,68 22,82 32,98 C42,110 62,92 68,64 Z" fill="url(#pearlWing2)" stroke="#c49f68" stroke-width="0.9"/>
-            <path d="M72,62 C88,18 124,14 126,40 C128,62 98,68 72,62 Z" fill="url(#pearlWing1)" stroke="#c49f68" stroke-width="1"/>
-            <path d="M72,64 C96,68 116,84 106,98 C96,110 78,92 72,64 Z" fill="url(#pearlWing2)" stroke="#c49f68" stroke-width="0.9"/>
-            <path d="M66,58 C50,36 28,34 26,44 M74,58 C90,36 110,36 112,46" stroke="#c49f68" stroke-width="0.6" fill="none" opacity="0.6"/>
-            <ellipse cx="70" cy="64" rx="2.5" ry="14" fill="#c49f68"/>
-            <path d="M69,50 Q64,38 58,36 M71,50 Q76,38 82,36" stroke="#c49f68" stroke-width="0.9" fill="none"/>
-        </svg>
-
-        <!-- Mariposa y hojas perladas inferiores derechas -->
-        <svg class="botanical-bottom" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
-            <path d="M160,175 Q148,110 165,25" stroke="#c49f68" stroke-width="1.2" fill="none" opacity="0.85"/>
-            <path d="M158,60 C130,45 125,22 148,18 C162,32 162,48 158,60 Z" fill="url(#pearlWing1)" stroke="#c49f68" stroke-width="0.9"/>
-            <path d="M156,95 C120,85 110,60 135,55 C152,68 156,82 156,95 Z" fill="url(#pearlWing2)" stroke="#c49f68" stroke-width="0.9"/>
-            <g transform="translate(22, 62) rotate(18)">
-                <path d="M68,62 C52,18 14,10 12,38 C10,60 40,68 68,62 Z" fill="url(#pearlWing1)" stroke="#c49f68" stroke-width="1"/>
-                <path d="M68,64 C44,68 22,82 32,98 C42,110 62,92 68,64 Z" fill="url(#pearlWing2)" stroke="#c49f68" stroke-width="0.9"/>
-                <path d="M72,62 C88,18 124,14 126,40 C128,62 98,68 72,62 Z" fill="url(#pearlWing1)" stroke="#c49f68" stroke-width="1"/>
-                <path d="M72,64 C96,68 116,84 106,98 C96,110 78,92 72,64 Z" fill="url(#pearlWing2)" stroke="#c49f68" stroke-width="0.9"/>
-                <ellipse cx="70" cy="64" rx="2.5" ry="14" fill="#c49f68"/>
-            </g>
-        </svg>
-
-        <div class="card">
-            <div class="crown-wrap">
-                <span class="crown-line"></span>
-                <svg class="crown" viewBox="0 0 100 52" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M14,42 L6,18 L28,30 L50,8 L72,30 L94,18 L86,42 Z" fill="rgba(196, 159, 104, 0.18)"/>
-                    <path d="M16,46 L84,46" stroke-width="1.6"/>
-                    <circle cx="50" cy="5" r="2.5" fill="#c49f68"/>
-                    <circle cx="6" cy="15" r="2" fill="#c49f68"/>
-                    <circle cx="94" cy="15" r="2" fill="#c49f68"/>
-                    <circle cx="28" cy="24" r="1.8" fill="#c49f68"/>
-                    <circle cx="72" cy="24" r="1.8" fill="#c49f68"/>
-                </svg>
-                <span class="crown-line right"></span>
-            </div>
-
-            <h1 class="title-xv">
-                <span class="word-small">Mis</span>
-                <span class="word-xv">XV</span>
-                <span class="word-small">años</span>
-            </h1>
-
-            <div class="name">Linda Patricia Borja García</div>
-
-            <div class="divider"><span>♥</span></div>
-
-            <div class="parents">
-                Mamá: Jaqueline Esperanza García Cruz<br>
-                Padrinos: Guillermo Rubio, Lesly Rubio
-            </div>
-
-            <div class="divider"><span>♥</span></div>
-
-            <div class="date">Viernes 11 de Diciembre 2026</div>
-
-            <div class="section-title">Ceremonia Religiosa</div>
-            <div class="details">
-                4:45 a 5:00 pm<br>
-                Iglesia: Santuario del Señor del Calvario Culhuacán<br>
-                Cda. 16 de Septiembre 11, Culhuacán, Iztapalapa, 09800
-            </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Santuario+del+Señor+del+Calvario+Culhuacan+Iztapalapa" target="_blank" class="btn">Ver ubicación en Maps</a>
-
-            <div class="countdown-label">Faltan para la ceremonia:</div>
-            <div class="countdown-container">
-                <div class="countdown-box"><span id="m-days">00</span><small>Días</small></div>
-                <div class="countdown-box"><span id="m-hours">00</span><small>Hrs</small></div>
-                <div class="countdown-box"><span id="m-mins">00</span><small>Min</small></div>
-                <div class="countdown-box"><span id="m-secs">00</span><small>Seg</small></div>
-            </div>
-
-            <div class="divider"><span>♥</span></div>
-
-            <div class="section-title">Recepción</div>
-            <div class="details">
-                Salón de eventos sociales Paladium<br>
-                Av. Tláhuac 4749, el vergel, Iztapalapa 09880, México
-            </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Salon+de+eventos+sociales+Paladium+Av+Tlahuac+4749" target="_blank" class="btn">Ver ubicación en Maps</a>
-
-            <div class="countdown-label">Faltan para la recepción:</div>
-            <div class="countdown-container">
-                <div class="countdown-box"><span id="r-days">00</span><small>Días</small></div>
-                <div class="countdown-box"><span id="r-hours">00</span><small>Hrs</small></div>
-                <div class="countdown-box"><span id="r-mins">00</span><small>Min</small></div>
-                <div class="countdown-box"><span id="r-secs">00</span><small>Seg</small></div>
-            </div>
-
-            <div class="divider"><span>♥</span></div>
-
-            <div class="section-title">Itinerario</div>
-            <div class="itinerary">
-                <b>6:30 pm a 7:00 pm:</b> Recepción<br>
-                <b>8:00 pm a 9:00 pm:</b> Comida<br>
-                <b>9:00 pm a 10:00 pm:</b> Vals<br>
-                <b>10:00 pm a 12:00 am:</b> Sorpresa<br>
-                <b>12:00 am a 2:00 am:</b> Baile<br>
-                <b>2:00 am a 2:30 am:</b> Despedida
-            </div>
-
-            <div class="divider"><span>♥</span></div>
-
-            <div class="section-title">Confirmar Asistencia</div>
-            <div class="details">
-                Por favor, confírmanos si nos acompañarás en este día tan especial.
-            </div>
-            <a href="https://wa.me/525527055695?text=Hola%20Linda%2C%20te%20confirmo%20mi%2Fnuestra%20asistencia%20a%20tu%20fiesta.%20%28Nombre%3A%20________________%29%20%28Asistentes%3A%20___%29" target="_blank" class="btn btn-whatsapp">Confirmar por WhatsApp</a>
-
-            <div class="divider"><span>♥</span></div>
-
-            <div class="section-title">Regalos</div>
-            <div class="gift-text">Lluvia de Sobres</div>
-        </div>
-    </div>
-
-    <script>
-        // Control de portada y música
-        const audio = document.getElementById('bg-music');
-        const overlay = document.getElementById('welcome-overlay');
-        const btnOpen = document.getElementById('btn-open');
-        const musicToggle = document.getElementById('music-toggle');
-
-        btnOpen.addEventListener('click', () => {
-            overlay.classList.add('hidden');
-            audio.play().then(() => {
-                musicToggle.textContent = '🔊';
-            }).catch(() => {
-                musicToggle.textContent = '🔇';
-            });
-        });
-
-        musicToggle.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    musicToggle.textContent = '🔊';
-                }).catch(() => {});
-            } else {
-                audio.pause();
-                musicToggle.textContent = '🔇';
-            }
-        });
-
-        // Contadores regresivos
-        const massDate = new Date("2026-12-11T17:00:00").getTime();
-        const receptionDate = new Date("2026-12-11T18:30:00").getTime();
-
-        function updateCountdown(targetDate, prefix) {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance < 0) {
-                document.getElementById(prefix + '-days').innerText = "00";
-                document.getElementById(prefix + '-hours').innerText = "00";
-                document.getElementById(prefix + '-mins').innerText = "00";
-                document.getElementById(prefix + '-secs').innerText = "00";
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById(prefix + '-days').innerText = days.toString().padStart(2, '0');
-            document.getElementById(prefix + '-hours').innerText = hours.toString().padStart(2, '0');
-            document.getElementById(prefix + '-mins').innerText = minutes.toString().padStart(2, '0');
-            document.getElementById(prefix + '-secs').innerText = seconds.toString().padStart(2, '0');
-        }
-
-        function tick() {
-            updateCountdown(massDate, 'm');
-            updateCountdown(receptionDate, 'r');
-        }
-
-        tick();
-        setInterval(tick, 1000);
-    </script>
-</body>
-</html>
+            0% { background-position: 0% 15%; }
+            50% { background-position: 100% 55%; }
+            100% { background-position: 20%
