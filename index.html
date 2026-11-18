@@ -4,140 +4,256 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis XV Años - Linda Patricia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #d4a373; /* Dorado suave */
-            --text-dark: #5a4a42;
-            --bg-pink: #fdf5f6; /* Rosa muy claro */
+            --gold: #c6a052;
+            --rose-gold: #b37d82;
+            --dark-rose: #8a5a60;
+            --bg-light: #fcf8f9;
         }
+        
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #fdf5f6 0%, #fbe8ea 50%, #f4d9df 100%);
+            /* Fondo holográfico suave imitando el borde de la imagen */
+            background: radial-gradient(circle at top left, #fdf5f6, transparent 40%),
+                        radial-gradient(circle at bottom right, #f5eef5, transparent 40%),
+                        linear-gradient(135deg, #fdfcfc 0%, #fbeff2 50%, #fbf5f0 100%);
             font-family: 'Playfair Display', serif;
-            color: var(--text-dark);
+            color: var(--dark-rose);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
+
         .card {
-            background-color: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--primary-color);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(15px);
             max-width: 500px;
             width: 90%;
             margin: 40px auto;
-            padding: 40px 20px;
+            padding: 50px 30px;
             text-align: center;
             position: relative;
+            /* Doble borde dorado con forma de arco arriba */
+            border: 1px solid var(--gold);
+            border-radius: 250px 250px 20px 20px;
+            box-shadow: 0 15px 40px rgba(179, 125, 130, 0.15);
+            z-index: 1;
         }
+
+        /* Borde interior delgado */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(198, 160, 82, 0.4);
+            border-radius: 240px 240px 15px 15px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Decoración Mariposa Top Left */
+        .butterfly-top {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 120px;
+            opacity: 0.85;
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        /* Decoración Mariposa Bottom Right */
+        .butterfly-bottom {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 150px;
+            opacity: 0.85;
+            transform: rotate(15deg);
+            pointer-events: none;
+        }
+
+        .crown {
+            width: 60px;
+            margin: 0 auto -10px auto;
+            display: block;
+            fill: var(--gold);
+        }
+
         .title-xv {
             font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            color: var(--primary-color);
-            margin: 0 0 10px 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            color: var(--gold);
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
         }
+        .title-xv .small { font-size: 3rem; }
+        .title-xv .large { font-size: 5rem; }
+
         .name {
+            font-family: 'Cinzel', serif;
             font-size: 1.8rem;
             font-weight: 700;
-            margin: 10px 0 20px 0;
-            color: #b57a68;
+            margin: 15px 0 25px 0;
+            color: var(--rose-gold);
+            letter-spacing: 1px;
         }
+
         .parents {
-            font-size: 1rem;
+            font-size: 1.05rem;
             margin-bottom: 20px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
+
         .divider {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin: 15px 0;
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin: 20px 0;
+            opacity: 0.7;
         }
+
         .date {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #b57a68;
-            margin-bottom: 20px;
-        }
-        .section-title {
             font-size: 1.4rem;
-            color: #b57a68;
-            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--rose-gold);
+            margin-bottom: 25px;
+            font-style: italic;
         }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--rose-gold);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
         .details {
-            font-size: 1rem;
-            line-height: 1.4;
+            font-size: 1.05rem;
+            line-height: 1.5;
             margin-bottom: 15px;
         }
+
         .btn {
             display: inline-block;
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, #d4af37, #c6a052);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             text-decoration: none;
-            border-radius: 25px;
-            font-size: 0.9rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 20px;
-            transition: background-color 0.3s;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(198, 160, 82, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-family: 'Cinzel', serif;
         }
         .btn:hover {
-            background-color: #b57a68;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(198, 160, 82, 0.4);
         }
+        
         .btn-whatsapp {
-            background-color: #25D366; /* Color de WhatsApp */
-            color: white;
+            background: linear-gradient(135deg, #b37d82, #9c686d);
+            box-shadow: 0 4px 15px rgba(179, 125, 130, 0.3);
         }
         .btn-whatsapp:hover {
-            background-color: #1ebe57;
+            box-shadow: 0 6px 20px rgba(179, 125, 130, 0.4);
         }
+
         .countdown-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 25px;
         }
         .countdown-box {
-            background: #fff;
-            border: 1px solid var(--primary-color);
-            border-radius: 10px;
-            padding: 10px;
-            min-width: 50px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 10px 5px;
+            min-width: 55px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
         .countdown-box span {
             display: block;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--primary-color);
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--rose-gold);
         }
         .countdown-box small {
             font-size: 0.7rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark-rose);
         }
+
         .itinerary {
             text-align: left;
             margin: 0 auto;
-            max-width: 350px;
-            font-size: 0.95rem;
+            max-width: 320px;
+            font-size: 1rem;
             line-height: 1.8;
         }
+        .itinerary b {
+            color: var(--rose-gold);
+            font-weight: 600;
+        }
+
         .gift-code {
             margin-top: 10px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            color: var(--text-dark);
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: var(--rose-gold);
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h1 class="title-xv">Mis XV Años</h1>
+        <!-- SVG Mariposa Superior -->
+        <svg class="butterfly-top" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#f4d9df;stop-opacity:0.9" />
+                    <stop offset="100%" style="stop-color:#c89fce;stop-opacity:0.6" />
+                </linearGradient>
+            </defs>
+            <path d="M50,40 C30,10 10,20 15,45 C20,70 45,55 50,55 C55,55 80,70 85,45 C90,20 70,10 50,40 Z" fill="url(#grad1)" stroke="#d4af37" stroke-width="0.5"/>
+            <path d="M50,40 C35,25 20,35 25,50 C30,65 45,55 50,55 C55,55 70,65 75,50 C80,35 65,25 50,40 Z" fill="rgba(255,255,255,0.4)" stroke="#d4af37" stroke-width="0.3"/>
+        </svg>
+
+        <!-- SVG Mariposa Inferior -->
+        <svg class="butterfly-bottom" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50,40 C30,10 10,20 15,45 C20,70 45,55 50,55 C55,55 80,70 85,45 C90,20 70,10 50,40 Z" fill="url(#grad1)" stroke="#d4af37" stroke-width="0.5"/>
+            <path d="M50,40 C35,25 20,35 25,50 C30,65 45,55 50,55 C55,55 70,65 75,50 C80,35 65,25 50,40 Z" fill="rgba(255,255,255,0.4)" stroke="#d4af37" stroke-width="0.3"/>
+        </svg>
+
+        <!-- Corona SVG -->
+        <svg class="crown" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10,40 L0,15 L25,25 L50,0 L75,25 L100,15 L90,40 Z" />
+            <circle cx="50" cy="45" r="3" />
+            <circle cx="25" cy="45" r="3" />
+            <circle cx="75" cy="45" r="3" />
+            <circle cx="50" cy="-5" r="4" />
+        </svg>
+
+        <h1 class="title-xv">
+            <span class="small">Mis</span> 
+            <span class="large">XV</span> 
+            <span class="small">Años</span>
+        </h1>
+        
         <div class="name">Linda Patricia Borja García</div>
         
         <div class="parents">
@@ -204,14 +320,14 @@
         <div class="details">
             Por favor, confírmanos si nos acompañarás en este día tan especial.
         </div>
-        <!-- Enlace de WhatsApp con el mensaje codificado y el número a 10 dígitos (52 es la lada de México) -->
-        <a href="https://wa.me/525527181692?text=Hola%20Linda%2C%20te%20confirmo%20mi%2Fnuestra%20asistencia%20a%20tu%20fiesta.%20%28Nombre%3A%20________________%29%20%28Asistentes%3A%20___%29" target="_blank" class="btn btn-whatsapp">Confirmar por WhatsApp</a>
+        <!-- Número actualizado al 5527055695 -->
+        <a href="https://wa.me/525527055695?text=Hola%20Linda%2C%20te%20confirmo%20mi%2Fnuestra%20asistencia%20a%20tu%20fiesta.%20%28Nombre%3A%20________________%29%20%28Asistentes%3A%20___%29" target="_blank" class="btn btn-whatsapp">Confirmar por WhatsApp</a>
 
         <div class="divider">♥</div>
 
         <!-- Regalos -->
         <div class="section-title">Regalos</div>
-        <div class="gift-code">✉️ Lluvia de Sobres</div>
+        <div class="gift-code">Lluvia de Sobres</div>
     </div>
 
     <script>
