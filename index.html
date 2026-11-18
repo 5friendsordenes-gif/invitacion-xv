@@ -26,7 +26,7 @@
             overflow-x: hidden;
         }
         body {
-            padding: 24px 14px 60px;
+            padding: 24px 14px 40px;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -125,7 +125,7 @@
             position: relative;
             max-width: 500px;
             width: 100%;
-            margin: 16px auto;
+            margin: 16px auto 0;
         }
         .card {
             position: relative;
@@ -187,7 +187,7 @@
         }
         .botanical-bottom {
             position: absolute;
-            bottom: -10px; right: -14px;
+            bottom: 48px; right: -14px;
             width: 145px;
             z-index: 4;
             pointer-events: none;
@@ -300,6 +300,33 @@
         .itinerary b { font-weight: 600; color: #4f3538; }
         .gift-text { font-size: 1.15rem; font-weight: 600; margin-top: 4px; }
 
+        /* Botón Powered by Five Friends */
+        .powered-footer {
+            text-align: center;
+            margin-top: 22px;
+        }
+        .btn-powered {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 24px;
+            border: 1px solid rgba(196, 159, 104, 0.65);
+            background: rgba(255, 255, 255, 0.68);
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.88rem;
+            letter-spacing: 0.4px;
+            box-shadow: 0 4px 12px rgba(150, 85, 94, 0.12);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .btn-powered strong {
+            color: var(--rose-title);
+            font-weight: 600;
+        }
+        .btn-powered:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.92);
+        }
+
         @media (max-width: 420px) {
             .card { padding: 40px 18px 44px; border-radius: 175px 175px 22px 22px; }
             .card::before { border-radius: 168px 168px 16px 16px; }
@@ -307,7 +334,7 @@
             .title-xv .word-xv { font-size: 3.9rem; }
             .name { font-size: 1.7rem; }
             .butterfly-top { width: 88px; left: -10px; }
-            .botanical-bottom { width: 115px; right: -10px; }
+            .botanical-bottom { width: 115px; right: -10px; bottom: 52px; }
         }
     </style>
 </head>
@@ -461,6 +488,12 @@
                 <div class="gift-text">Lluvia de Sobres</div>
             </div>
         </div>
+
+        <footer class="powered-footer">
+            <a href="https://five-friends-web.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-powered">
+                Powered by <strong>Five Friends</strong>
+            </a>
+        </footer>
     </div>
 
     <script>
