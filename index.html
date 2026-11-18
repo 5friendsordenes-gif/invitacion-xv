@@ -6,91 +6,518 @@
     <title>Mis XV Años - Linda Patricia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #c49f68;
-            --gold-deep: #ab8247;
+            --gold-deep: #a57a40;
             --rose-title: #96555e;
             --rose-date: #993e51;
             --text-dark: #3e2e30;
-            --heart-peach: #d8967a;
+            --heart: #d8967a;
         }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
+        * { box-sizing: border-box; }
+        html, body {
             margin: 0;
-            padding: 24px 14px;
-            min-height: 100vh;
+            padding: 0;
+            min-height: 100%;
+            font-family: 'EB Garamond', Georgia, serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+        body {
+            padding: 24px 14px 60px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: linear-gradient(125deg, #fbe8f2 0%, #e1effd 25%, #f0e2fa 50%, #fceee2 75%, #dff4f2 100%);
+            background-size: 260% 260%;
+            animation: pearlShift 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes pearlShift {
+            0% { background-position: 0% 15%; }
+            50% { background-position: 100% 55%; }
+            100% { background-position: 20% 100%; }
+        }
+        @keyframes floatSlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(45px, 35px) scale(1.12); }
+        }
+        @keyframes pearlSheen {
+            0% { transform: translateX(-130%) rotate(25deg); }
+            100% { transform: translateX(190%) rotate(25deg); }
+        }
+
+        /* Pantalla de bienvenida */
+        .welcome-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 999;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'EB Garamond', serif;
-            color: var(--text-dark);
-            overflow-x: hidden;
-            background-color: #f9f3f7;
-            position: relative;
-        }
-
-        /* Fondo exterior perlado tornasol animado */
-        .pearl-bg {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            overflow: hidden;
-            background: linear-gradient(125deg, #fceef5 0%, #e8f3fc 25%, #f3e9fb 50%, #fdf2e9 75%, #e6f6f5 100%);
+            padding: 24px;
+            text-align: center;
+            background: linear-gradient(135deg, #fcebf4, #e4f1fd, #f2e6fb, #fdf0e4);
             background-size: 240% 240%;
-            animation: pearlGradient 16s ease-in-out infinite alternate;
+            animation: pearlShift 12s ease-in-out infinite alternate;
+            transition: opacity 0.7s ease, visibility 0.7s ease;
+        }
+        .welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .welcome-box {
+            max-width: 360px;
+            width: 100%;
+            padding: 40px 24px;
+            border: 1.5px solid rgba(196, 159, 104, 0.85);
+            border-radius: 180px 180px 24px 24px;
+            background: linear-gradient(145deg, rgba(255, 240, 248, 0.85), rgba(232, 244, 255, 0.85), rgba(244, 233, 255, 0.85));
+            box-shadow: 0 16px 36px rgba(150, 85, 94, 0.16);
+        }
+        .welcome-sub {
+            font-size: 0.95rem;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            color: var(--rose-title);
+            margin-bottom: 6px;
+        }
+        .btn-open {
+            margin-top: 18px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #d8b882, #b4884b);
+            color: #fff;
+            padding: 13px 30px;
+            border-radius: 30px;
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            box-shadow: 0 6px 18px rgba(171, 130, 71, 0.35);
         }
 
-        .pearl-orb {
+        /* Botón flotante de música */
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 50;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(196, 159, 104, 0.85);
+            background: rgba(255, 248, 252, 0.92);
+            color: var(--rose-title);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px rgba(150, 85, 94, 0.22);
+        }
+
+        /* Contenedor y tarjeta perlada tornasol */
+        .card-wrapper {
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+            margin: 16px auto;
+        }
+        .card {
+            position: relative;
+            overflow: hidden;
+            border: 1.5px solid rgba(196, 159, 104, 0.85);
+            border-radius: 250px 250px 26px 26px;
+            padding: 46px 26px 50px;
+            text-align: center;
+            background: linear-gradient(135deg, #fce8f3 0%, #dfeefc 18%, #efe0fa 36%, #fdefe1 54%, #ddf4f1 72%, #fbe3f0 90%, #e5efff 100%);
+            background-size: 300% 300%;
+            animation: pearlShift 13s ease-in-out infinite alternate;
+            box-shadow: 0 18px 42px rgba(150, 85, 94, 0.18), inset 0 0 36px rgba(255, 255, 255, 0.6);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 9px; left: 9px; right: 9px; bottom: 9px;
+            border: 1px solid rgba(196, 159, 104, 0.45);
+            border-radius: 242px 242px 20px 20px;
+            pointer-events: none;
+            z-index: 3;
+        }
+        .card::after {
+            content: '';
+            position: absolute;
+            top: -20%; left: -50%;
+            width: 60%; height: 150%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.42), transparent);
+            pointer-events: none;
+            z-index: 1;
+            animation: pearlSheen 10s ease-in-out infinite;
+        }
+
+        /* Orbes perlados suaves detrás del texto */
+        .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(65px);
-            opacity: 0.78;
+            filter: blur(45px);
+            opacity: 0.72;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatSlow 12s ease-in-out infinite alternate;
+        }
+        .orb-a { width: 240px; height: 240px; background: rgba(255, 192, 222, 0.9); top: 4%; left: -40px; }
+        .orb-b { width: 260px; height: 260px; background: rgba(180, 222, 255, 0.9); top: 32%; right: -50px; animation-direction: alternate-reverse; }
+        .orb-c { width: 250px; height: 250px; background: rgba(220, 192, 255, 0.88); top: 62%; left: -30px; }
+        .orb-d { width: 240px; height: 240px; background: rgba(255, 220, 188, 0.88); bottom: 4%; right: -20px; animation-direction: alternate-reverse; }
+
+        .card-content { position: relative; z-index: 2; }
+
+        /* Decoraciones */
+        .butterfly-top {
+            position: absolute;
+            top: 8px; left: -14px;
+            width: 110px;
+            z-index: 4;
+            pointer-events: none;
+            transform: rotate(-12deg);
+        }
+        .botanical-bottom {
+            position: absolute;
+            bottom: -10px; right: -14px;
+            width: 145px;
+            z-index: 4;
             pointer-events: none;
         }
 
-        .orb-1 {
-            width: 380px;
-            height: 380px;
-            background: radial-gradient(circle, rgba(255, 202, 226, 0.9), transparent 70%);
-            top: -80px;
-            left: -80px;
-            animation: floatOrb1 14s ease-in-out infinite alternate;
+        .crown-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .crown-line {
+            width: 42px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+        .crown-line.right { background: linear-gradient(to left, transparent, var(--gold)); }
+        .crown { width: 54px; fill: none; stroke: var(--gold-deep); stroke-width: 1.8; }
+
+        .title-xv {
+            font-family: 'Pinyon Script', cursive;
+            font-weight: 400;
+            margin: 2px 0 8px;
+            line-height: 1.05;
+            color: var(--gold-deep);
+        }
+        .title-xv .word-small { font-size: 3rem; }
+        .title-xv .word-xv { font-size: 4.7rem; margin: 0 2px; }
+
+        .name {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--rose-title);
+            margin: 6px 0 12px;
+            line-height: 1.2;
+        }
+        .parents { font-size: 1.06rem; line-height: 1.55; margin: 8px 0 12px; }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 18px auto;
+            max-width: 230px;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(165, 122, 64, 0.7), transparent);
+        }
+        .divider span { color: var(--heart); font-size: 0.95rem; }
+
+        .date { font-size: 1.46rem; font-weight: 600; color: var(--rose-date); margin: 10px 0 20px; }
+        .section-title { font-size: 1.42rem; font-weight: 600; color: var(--rose-title); margin: 4px 0 8px; }
+        .details { font-size: 1.05rem; line-height: 1.5; margin-bottom: 14px; }
+        .countdown-label { font-size: 0.95rem; font-style: italic; color: var(--rose-title); margin-bottom: 8px; }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #d8b882, #b4884b);
+            color: #fff;
+            padding: 10px 24px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin: 4px 0 20px;
+            box-shadow: 0 5px 15px rgba(165, 122, 64, 0.32);
+        }
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #b8757e, #96555e);
+            box-shadow: 0 5px 15px rgba(150, 85, 94, 0.32);
+            margin-bottom: 10px;
         }
 
-        .orb-2 {
-            width: 420px;
-            height: 420px;
-            background: radial-gradient(circle, rgba(190, 225, 255, 0.9), transparent 70%);
-            top: 20%;
-            right: -120px;
-            animation: floatOrb2 18s ease-in-out infinite alternate;
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.48);
+            border: 1px solid rgba(196, 159, 104, 0.6);
+            border-radius: 10px;
+            padding: 8px 6px;
+            min-width: 58px;
+        }
+        .countdown-box span {
+            display: block;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--rose-date);
+            line-height: 1.1;
+        }
+        .countdown-box small {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
         }
 
-        .orb-3 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(224, 198, 255, 0.88), transparent 70%);
-            bottom: -100px;
-            left: 10%;
-            animation: floatOrb3 16s ease-in-out infinite alternate;
+        .itinerary { margin: 4px auto 8px; font-size: 1.04rem; line-height: 1.75; }
+        .itinerary b { font-weight: 600; color: #4f3538; }
+        .gift-text { font-size: 1.15rem; font-weight: 600; margin-top: 4px; }
+
+        @media (max-width: 420px) {
+            .card { padding: 40px 18px 44px; border-radius: 175px 175px 22px 22px; }
+            .card::before { border-radius: 168px 168px 16px 16px; }
+            .title-xv .word-small { font-size: 2.5rem; }
+            .title-xv .word-xv { font-size: 3.9rem; }
+            .name { font-size: 1.7rem; }
+            .butterfly-top { width: 88px; left: -10px; }
+            .botanical-bottom { width: 115px; right: -10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop preload="auto">
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="welcome-overlay" id="welcome-overlay">
+        <div class="welcome-box">
+            <div class="welcome-sub">Estás invitado a</div>
+            <div class="title-xv">
+                <span class="word-small">Mis</span>
+                <span class="word-xv">XV</span>
+                <span class="word-small">años</span>
+            </div>
+            <div class="name">Linda Patricia</div>
+            <button class="btn-open" id="btn-open">Abrir Invitación ✨</button>
+        </div>
+    </div>
+
+    <button class="music-toggle" id="music-toggle" aria-label="Música">🔊</button>
+
+    <div class="card-wrapper">
+        <svg class="butterfly-top" viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="pw1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
+                    <stop offset="40%" stop-color="#f7dce8" stop-opacity="0.82"/>
+                    <stop offset="75%" stop-color="#dcebfb" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="#f5e1cf" stop-opacity="0.88"/>
+                </linearGradient>
+                <linearGradient id="pw2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#fff8f4" stop-opacity="0.9"/>
+                    <stop offset="50%" stop-color="#e9dcf6" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="#d7ebf7" stop-opacity="0.85"/>
+                </linearGradient>
+            </defs>
+            <path d="M68,62 C52,18 14,10 12,38 C10,60 40,68 68,62 Z" fill="url(#pw1)" stroke="#c49f68" stroke-width="1"/>
+            <path d="M68,64 C44,68 22,82 32,98 C42,110 62,92 68,64 Z" fill="url(#pw2)" stroke="#c49f68" stroke-width="0.9"/>
+            <path d="M72,62 C88,18 124,14 126,40 C128,62 98,68 72,62 Z" fill="url(#pw1)" stroke="#c49f68" stroke-width="1"/>
+            <path d="M72,64 C96,68 116,84 106,98 C96,110 78,92 72,64 Z" fill="url(#pw2)" stroke="#c49f68" stroke-width="0.9"/>
+            <ellipse cx="70" cy="64" rx="2.5" ry="14" fill="#c49f68"/>
+            <path d="M69,50 Q64,38 58,36 M71,50 Q76,38 82,36" stroke="#c49f68" stroke-width="0.9" fill="none"/>
+        </svg>
+
+        <svg class="botanical-bottom" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+            <path d="M160,175 Q148,110 165,25" stroke="#c49f68" stroke-width="1.2" fill="none" opacity="0.85"/>
+            <path d="M158,60 C130,45 125,22 148,18 C162,32 162,48 158,60 Z" fill="url(#pw1)" stroke="#c49f68" stroke-width="0.9"/>
+            <path d="M156,95 C120,85 110,60 135,55 C152,68 156,82 156,95 Z" fill="url(#pw2)" stroke="#c49f68" stroke-width="0.9"/>
+            <g transform="translate(22, 62) rotate(18)">
+                <path d="M68,62 C52,18 14,10 12,38 C10,60 40,68 68,62 Z" fill="url(#pw1)" stroke="#c49f68" stroke-width="1"/>
+                <path d="M68,64 C44,68 22,82 32,98 C42,110 62,92 68,64 Z" fill="url(#pw2)" stroke="#c49f68" stroke-width="0.9"/>
+                <path d="M72,62 C88,18 124,14 126,40 C128,62 98,68 72,62 Z" fill="url(#pw1)" stroke="#c49f68" stroke-width="1"/>
+                <path d="M72,64 C96,68 116,84 106,98 C96,110 78,92 72,64 Z" fill="url(#pw2)" stroke="#c49f68" stroke-width="0.9"/>
+                <ellipse cx="70" cy="64" rx="2.5" ry="14" fill="#c49f68"/>
+            </g>
+        </svg>
+
+        <div class="card">
+            <div class="orb orb-a"></div>
+            <div class="orb orb-b"></div>
+            <div class="orb orb-c"></div>
+            <div class="orb orb-d"></div>
+
+            <div class="card-content">
+                <div class="crown-wrap">
+                    <span class="crown-line"></span>
+                    <svg class="crown" viewBox="0 0 100 52" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14,42 L6,18 L28,30 L50,8 L72,30 L94,18 L86,42 Z" fill="rgba(196, 159, 104, 0.2)"/>
+                        <path d="M16,46 L84,46" stroke-width="1.6"/>
+                        <circle cx="50" cy="5" r="2.5" fill="#a57a40"/>
+                        <circle cx="6" cy="15" r="2" fill="#a57a40"/>
+                        <circle cx="94" cy="15" r="2" fill="#a57a40"/>
+                    </svg>
+                    <span class="crown-line right"></span>
+                </div>
+
+                <h1 class="title-xv">
+                    <span class="word-small">Mis</span>
+                    <span class="word-xv">XV</span>
+                    <span class="word-small">años</span>
+                </h1>
+
+                <div class="name">Linda Patricia Borja García</div>
+                <div class="divider"><span>♥</span></div>
+
+                <div class="parents">
+                    Mamá: Jaqueline Esperanza García Cruz<br>
+                    Padrinos: Guillermo Rubio, Lesly Rubio
+                </div>
+
+                <div class="divider"><span>♥</span></div>
+                <div class="date">Viernes 11 de Diciembre 2026</div>
+
+                <div class="section-title">Ceremonia Religiosa</div>
+                <div class="details">
+                    4:45 a 5:00 pm<br>
+                    Iglesia: Santuario del Señor del Calvario Culhuacán<br>
+                    Cda. 16 de Septiembre 11, Culhuacán, Iztapalapa, 09800
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Santuario+del+Señor+del+Calvario+Culhuacan+Iztapalapa" target="_blank" class="btn">Ver ubicación en Maps</a>
+
+                <div class="countdown-label">Faltan para la ceremonia:</div>
+                <div class="countdown-container">
+                    <div class="countdown-box"><span id="m-days">00</span><small>Días</small></div>
+                    <div class="countdown-box"><span id="m-hours">00</span><small>Hrs</small></div>
+                    <div class="countdown-box"><span id="m-mins">00</span><small>Min</small></div>
+                    <div class="countdown-box"><span id="m-secs">00</span><small>Seg</small></div>
+                </div>
+
+                <div class="divider"><span>♥</span></div>
+
+                <div class="section-title">Recepción</div>
+                <div class="details">
+                    Salón de eventos sociales Paladium<br>
+                    Av. Tláhuac 4749, el vergel, Iztapalapa 09880, México
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Salon+de+eventos+sociales+Paladium+Av+Tlahuac+4749" target="_blank" class="btn">Ver ubicación en Maps</a>
+
+                <div class="countdown-label">Faltan para la recepción:</div>
+                <div class="countdown-container">
+                    <div class="countdown-box"><span id="r-days">00</span><small>Días</small></div>
+                    <div class="countdown-box"><span id="r-hours">00</span><small>Hrs</small></div>
+                    <div class="countdown-box"><span id="r-mins">00</span><small>Min</small></div>
+                    <div class="countdown-box"><span id="r-secs">00</span><small>Seg</small></div>
+                </div>
+
+                <div class="divider"><span>♥</span></div>
+
+                <div class="section-title">Itinerario</div>
+                <div class="itinerary">
+                    <b>6:30 pm a 7:00 pm:</b> Recepción<br>
+                    <b>8:00 pm a 9:00 pm:</b> Comida<br>
+                    <b>9:00 pm a 10:00 pm:</b> Vals<br>
+                    <b>10:00 pm a 12:00 am:</b> Sorpresa<br>
+                    <b>12:00 am a 2:00 am:</b> Baile<br>
+                    <b>2:00 am a 2:30 am:</b> Despedida
+                </div>
+
+                <div class="divider"><span>♥</span></div>
+
+                <div class="section-title">Confirmar Asistencia</div>
+                <div class="details">Por favor, confírmanos si nos acompañarás en este día tan especial.</div>
+                <a href="https://wa.me/525527055695?text=Hola%20Linda%2C%20te%20confirmo%20mi%2Fnuestra%20asistencia%20a%20tu%20fiesta.%20%28Nombre%3A%20________________%29%20%28Asistentes%3A%20___%29" target="_blank" class="btn btn-whatsapp">Confirmar por WhatsApp</a>
+
+                <div class="divider"><span>♥</span></div>
+
+                <div class="section-title">Regalos</div>
+                <div class="gift-text">Lluvia de Sobres</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var audio = document.getElementById('bg-music');
+        var overlay = document.getElementById('welcome-overlay');
+        var btnOpen = document.getElementById('btn-open');
+        var musicToggle = document.getElementById('music-toggle');
+
+        btnOpen.addEventListener('click', function () {
+            overlay.classList.add('hidden');
+            if (audio) {
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(function () {
+                        musicToggle.textContent = '🔊';
+                    }).catch(function () {
+                        musicToggle.textContent = '🔇';
+                    });
+                }
+            }
+        });
+
+        musicToggle.addEventListener('click', function () {
+            if (!audio) return;
+            if (audio.paused) {
+                audio.play().then(function () { musicToggle.textContent = '🔊'; }).catch(function () {});
+            } else {
+                audio.pause();
+                musicToggle.textContent = '🔇';
+            }
+        });
+
+        var massDate = new Date("2026-12-11T17:00:00").getTime();
+        var receptionDate = new Date("2026-12-11T18:30:00").getTime();
+
+        function updateCountdown(targetDate, prefix) {
+            var now = new Date().getTime();
+            var distance = targetDate - now;
+            if (distance < 0) distance = 0;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById(prefix + '-days').innerText = String(days).padStart(2, '0');
+            document.getElementById(prefix + '-hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById(prefix + '-mins').innerText = String(minutes).padStart(2, '0');
+            document.getElementById(prefix + '-secs').innerText = String(seconds).padStart(2, '0');
         }
 
-        .orb-4 {
-            width: 340px;
-            height: 340px;
-            background: radial-gradient(circle, rgba(255, 222, 194, 0.88), transparent 70%);
-            bottom: 18%;
-            right: 5%;
-            animation: floatOrb1 20s ease-in-out infinite alternate-reverse;
+        function tick() {
+            updateCountdown(massDate, 'm');
+            updateCountdown(receptionDate, 'r');
         }
-
-        @keyframes pearlGradient {
-            0% { background-position: 0% 15%; }
-            50% { background-position: 100% 55%; }
-            100% { background-position: 20%
+        tick();
+        setInterval(tick, 1000);
+    </script>
+</body>
+</html>
